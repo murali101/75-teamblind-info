@@ -1,5 +1,7 @@
 package com.teamblind.mk;
 
+import java.util.Arrays;
+
 /**
  *
  * https://leetcode.com/problems/two-sum/
@@ -36,19 +38,37 @@ package com.teamblind.mk;
  *
  *
  * Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
+ *
  */
 
 public class ArrayTwoSum {
 
     public static void main(String[] args) {
-
+        int[] nums = {2,7,11,15};
+        int target = 6;
+        System.out.println(Arrays.toString(twoSum(nums, target)));
     }
 
     public static int[] twoSum(int[] nums, int target) {
 
         int[] result  = new int[2];
-
-
+        boolean resultFound = false;
+        int i = 0;
+        while (!resultFound) {
+            for (i = 0; i < nums.length; i++) {
+                int temp = target - nums[i];
+                for (int j = 0; j < nums.length && i != j; j++) {
+                    if (temp - nums[j] == 0) {
+                        result[0] = i;
+                        result[1] = j;
+                        resultFound = true;
+                        break;
+                    }
+                }
+                if (resultFound) break;
+            }
+            if (i == nums.length) break;
+        }
         return result;
     }
 }
